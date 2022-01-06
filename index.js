@@ -36,7 +36,7 @@ app.post("/groupme", async (req, res) => {
     channel.send(
       `${name}: ${text} ${files.length ? files.join(" ") : ""}${
         files.length && " If these files cannot be viewed, please check Groupme"
-      }${notice && " Something other than an image.. check GroupMe."}`
+      }`
     );
   else console.log("No channel found.");
 });
