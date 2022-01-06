@@ -23,7 +23,14 @@ client.on("ready", async () => {
 app.post("/groupme", async (req, res) => {
   console.log(req.body);
   const { attachments, name, text } = req.body;
-  if (channel) channel.send(`${name}: ${text}`, { files: attachments });
+  let files = [];
+  if (attachments.length) {
+    files = attachments.map((attachment) => {
+      return attachment.url;
+    });
+  }
+
+  if (channel) channel.send(`${name}: ${text}`, { files });
   else console.log("No channel found.");
 });
 
