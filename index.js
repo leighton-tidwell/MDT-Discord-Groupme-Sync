@@ -18,6 +18,9 @@ client.on("ready", async () => {
 
 app.get("/", function (req, res) {
   res.send("<h1>Hello World!</h1>");
+  const guild = await client.guilds.fetch("928711880552366082");
+  const channel = guild.channels.cache.get("928741601658933298");
+  channel.send("This message came from an HTTP request.");
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
