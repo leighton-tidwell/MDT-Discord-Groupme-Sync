@@ -3,6 +3,8 @@ const { DISCORD_TOKEN } = process.env;
 const { Client, Intents } = require("discord.js");
 const express = require("express");
 const app = express();
+app.use(express.urlencoded({ extended: true, limit: "16mb" }));
+app.use(express.json({ limit: "16mb" }));
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS],
@@ -19,7 +21,7 @@ client.on("ready", async () => {
 });
 
 app.post("/groupme", async (req, res) => {
-  console.log(req);
+  console.log(req.body);
   // if (channel) channel.send("This message came from an HTTP request.");
   // else console.log("No channel found.");
   // res.send("<h1>Hello World!</h1>");
