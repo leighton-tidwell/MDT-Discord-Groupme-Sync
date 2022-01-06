@@ -24,13 +24,20 @@ app.post("/groupme", async (req, res) => {
   console.log(req.body);
   const { attachments, name, text } = req.body;
   let files = [];
+  let notice;
   if (attachments.length) {
-    files = attachments.map((attachment) => {
-      return attachment.url;
+    attachments.forEach((attachment) => {
+      attachment.type === "image" && files.push(attachment.url);
     });
+    if (files.length === 0) notice = true;
   }
 
-  if (channel) channel.send(`${name}: ${text}`, { files });
+  if (channel)
+    channel.send(
+      `${name}: ${text} ${files.length ? files.join(" ") : ""}${
+        notice && " Something other than an image.. check GroupMe."
+      }`
+    );
   else console.log("No channel found.");
 });
 
