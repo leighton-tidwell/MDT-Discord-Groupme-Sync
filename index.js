@@ -8,18 +8,19 @@ const client = new Client({
   intents: [Intents.FLAGS.GUILDS],
 });
 
+let channel;
+
 client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const guild = await client.guilds.fetch("928711880552366082");
-  const channel = guild.channels.cache.get("928741601658933298");
+  channel = guild.channels.cache.get("928741601658933298");
   // channel.send("I'm online!");
   // const channel = guild.channels.cache.get("894349711761346612");
 });
 
 app.get("/", async (req, res) => {
-  const guild = await client.guilds.fetch("928711880552366082");
-  const channel = guild.channels.cache.get("928741601658933298");
-  channel.send("This message came from an HTTP request.");
+  if (channel) channel.send("This message came from an HTTP request.");
+  else console.log("No channel found.");
   res.send("<h1>Hello World!</h1>");
 });
 
