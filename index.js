@@ -1,6 +1,7 @@
 require("dotenv").config(); //initialize dotenv
 const { DISCORD_TOKEN } = process.env;
 const { Client, Intents } = require("discord.js");
+const http = require("http");
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS],
