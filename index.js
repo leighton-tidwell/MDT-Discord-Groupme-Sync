@@ -22,9 +22,9 @@ client.on("ready", async () => {
 
 app.post("/groupme", async (req, res) => {
   console.log(req.body);
-  // if (channel) channel.send("This message came from an HTTP request.");
-  // else console.log("No channel found.");
-  // res.send("<h1>Hello World!</h1>");
+  const { attachments, name, text } = req.body;
+  if (channel) channel.send(`${name}: ${text}`, { files: attachments });
+  else console.log("No channel found.");
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
