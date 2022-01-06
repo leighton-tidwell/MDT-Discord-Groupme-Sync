@@ -16,7 +16,7 @@ client.on("ready", async () => {
   // const channel = guild.channels.cache.get("894349711761346612");
 });
 
-app.get("/", function (req, res) {
+app.get("/", async (req, res) => {
   const guild = await client.guilds.fetch("928711880552366082");
   const channel = guild.channels.cache.get("928741601658933298");
   channel.send("This message came from an HTTP request.");
