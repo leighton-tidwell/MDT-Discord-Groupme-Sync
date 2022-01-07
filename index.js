@@ -16,21 +16,18 @@ client.on("ready", async () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const guild = await client.guilds.fetch("928711880552366082");
   channel = guild.channels.cache.get("928741601658933298");
-  // channel.send("I'm online!");
-  // const channel = guild.channels.cache.get("894349711761346612");
 });
+
+client.login(DISCORD_TOKEN);
 
 app.post("/groupme", async (req, res) => {
   console.log(req.body);
   const { attachments, name, text } = req.body;
   let files = [];
-  let notice;
-  if (attachments.length) {
+  if (attachments.length)
     attachments.forEach((attachment) => {
       attachment.type === "image" && files.push(attachment.url);
     });
-    if (files.length === 0) notice = true;
-  }
 
   if (channel)
     channel.send(
@@ -44,5 +41,3 @@ app.post("/groupme", async (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => console.log("Server is running..."));
-
-client.login(DISCORD_TOKEN);
